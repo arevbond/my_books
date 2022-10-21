@@ -1,0 +1,9 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+    <a href="{% url 'profile:add_book' %}">Добавить книгу</a>
+
+    {% for book in books %}
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+    {% endfor %}
+{% endblock %}
