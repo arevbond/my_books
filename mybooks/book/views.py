@@ -14,15 +14,16 @@ class BookListView(LoginRequiredMixin, ListView):
     login_url = '/users/login/'
 
 
-# class UpdateBookView(UpdateView):
-#     form_class = UpdateBookFoorm
-#     template_name = 'book/update_book.html'
-#
-#     def form_valid(self, form):
-#         obj = form.save(commit=False)
-#         obj.user = self.request.user
-#         obj.save()
-#         return redirect('profile:profile')
+class UpdateBookView(UpdateView):
+    form_class = UpdateBookForm
+    template_name = 'book/update_book.html'
+    pk_url_kwarg = 'book_id'
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
+        return redirect('profile:profile')
 
 
 class AddBookView(CreateView):
