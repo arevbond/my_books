@@ -2,8 +2,29 @@
 
 {% block content %}
     <a href="{% url 'profile:add_book' %}">Добавить книгу</a>
-
+    <h1>Всего книг - {{ amout_books }}</h1>
+    <a href="{% url 'logout' %}">Logout</a>
+    <table class="table">
+    <thead>
+        <th class="col">Название</th>
+        <th class="col">Автор</th>
+        <th class="col">Категория</th>
+        <th class="col">Рейтинг</th>
+        <th class="col">Время создания</th>
+        <th class="col">Любимая книга</th>
+    </thead>
+    <tbody>
     {% for book in books %}
-        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+        <tr>
+            <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.rating }}</td>
+            <td>{{ book.time_create }}</td>
+            <td>{{ book.favorite }}</td>
+        </tr>
     {% endfor %}
+    </tbody>
+    </table>
+
 {% endblock %}

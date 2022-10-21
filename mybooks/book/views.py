@@ -13,6 +13,11 @@ class BookListView(LoginRequiredMixin, ListView):
 
     login_url = '/users/login/'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['amout_books'] = Book.objects.all().count()
+        return context
+
 
 class UpdateBookView(UpdateView):
     form_class = UpdateBookForm
