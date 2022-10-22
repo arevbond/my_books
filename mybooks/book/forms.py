@@ -5,11 +5,11 @@ from .models import Book
 
 class AddBookForm(forms.ModelForm):
     class Meta:
-        fields = '__all__'
+        fields = ('title', 'author', 'category', 'photo', 'review', 'rating', 'favorite')
         model = Book
 
 
 class UpdateBookForm(forms.ModelForm):
     class Meta:
-        fields = '__all__'
+        fields = ('title', 'author', 'category', 'photo', 'review', 'rating', 'favorite')
         model = Book

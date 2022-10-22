@@ -1,5 +1,8 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-    {{ book.title }}
+    <a href="{% url 'profile:update_book' book_id=book.id %}">Изменить книгу</a>
+    <h3>Название книги: {{ book.title }}</h3>
+    <h4>Автор книги: {{ book.author }}</h4>
+    <img src="{{ book.photo.url }}" alt="{{ book.title }}" class="img-fluid" width=400>
 {% endblock %}

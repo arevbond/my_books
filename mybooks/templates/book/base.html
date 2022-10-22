@@ -7,9 +7,12 @@
 </head>
 <body class="container">
 
-<ul class="list-group">
+<ul class="list-group ">
     <li class="list-group-item">
-        User: {{ user }}
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'profile:profile' %}">{{ user }}</a>
+        <a href="{% url 'logout' %}" class="link-secondary">Logout</a>
+        </div>
     </li>
 </ul>
 

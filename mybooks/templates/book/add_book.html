@@ -1,13 +1,18 @@
 {% extends 'book/base.html' %}
-
 {% block content %}
-
-    <form action="{% url 'profile:add_book' %}" method="post">
+    <a href="{% url 'profile:profile' %}" class="link-secondary">Вернуться назад</a>
+    <div class="">
+    <form action="{% url 'profile:add_book' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="form-error">{{ form.non_field_errors }}</div>
         {% for f in form %}
-            {{ f }}
+        <p><label for="{{ f.id_for_label }}" class="col-sm-2 col-form-label">{{ f.label }}</label>
+        {{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
         {% endfor %}
-    <button type="submit">Submit</button>
+
+    <button type="button" class="btn btn-secondary mb-3">Добавить</button>
     </form>
+    </div>
 
 {% endblock %}
