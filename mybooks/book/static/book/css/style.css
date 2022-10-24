@@ -1,0 +1,20 @@
+.detail_blocks{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.detail_book{
+    width: 600px;
+    margin-right: 50px;
+}
+.detail_review{
+    margin-top: 150px;
+    width: 700px;
+}
+.detail_bold{
+    font-weight: bold;
+}
+
+.link_to_review{
+    text-decoration: none;
+}

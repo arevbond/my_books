@@ -1,8 +1,18 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-    <a href="{% url 'profile:update_book' book_id=book.id %}">Изменить книгу</a>
-    <h3>Название книги: {{ book.title }}</h3>
-    <h4>Автор книги: {{ book.author }}</h4>
-    <img src="{{ book.photo.url }}" alt="{{ book.title }}" class="img-fluid" width=400>
+    <div class="detail_blocks">
+        <div class="detail_book">
+        <h3>{{ book.title }}</h3>
+        <h4>{{ book.author }}</h4>
+        <img src="{{ book.photo.url }}" alt="{{ book.title }}" class="img-fluid" width=400>
+        </div>
+        <div class="detail_review">
+        <p><span class="detail_bold">Категория: </span>{{ book.category }}</p>
+        <p><span class="detail_bold">Отзыв: </span> {{ book.review }}</p>
+        <p><span class="detail_bold">Оценка книги: </span>{{ book.rating }}</p>
+        <p><span class="detail_bold">Время создания: </span> {{ book.time_create }}</p>
+        <a class='link_to_review' href="{% url 'profile:update_book' book_id=book.id %}">Изменить отзыв</a>
+        </div>
+    </div>
 {% endblock %}
