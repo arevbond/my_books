@@ -16,7 +16,7 @@
         <th class="col">Автор</th>
 {#        <th class="col">Категория</th>#}
         <th class="col"><a href="{% url 'profile:order_by_rating' %}" style="text-decoration: none; color: #212529">Рейтинг</a></th>
-        <th class="col">Время создания</th>
+        <th class="col"><a href="{% url 'profile:order_by_time_create' %}" style="text-decoration: none; color: #212529">Время создания</a></th>
         <th class="col"><a href="{% url 'profile:favorite_books' %}" style="text-decoration: none; color: #212529">Любимая книга</a></th>
     </thead>
     <tbody>

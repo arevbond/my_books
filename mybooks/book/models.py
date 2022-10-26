@@ -16,6 +16,7 @@ class Book(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField(max_length=255, verbose_name='Название книги')
     author = models.CharField(max_length=100, verbose_name='Автор книги')
+    description = models.CharField(max_length=255, verbose_name='Описание книги', null=True, blank=True)
     category = models.CharField(max_length=50, choices=Category.choices, verbose_name='Категория')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Обложка', blank=True, null=True)
     review = models.TextField(verbose_name='Рецензия')

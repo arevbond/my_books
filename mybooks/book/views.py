@@ -6,7 +6,8 @@ from django.db.models import Q
 from .forms import *
 from .utils import BookMixinData
 
-from .dowloand_photo import dowloand_photo
+from .help_funcs.dowloand_photo import dowloand_photo
+from .help_funcs.dowloan_book_description import dowloand_book_desc
 
 
 class BookListView(LoginRequiredMixin, BookMixinData, ListView):
@@ -45,6 +46,7 @@ class AddBookView(CreateView):
         obj = form.save(commit=False)
         obj.user = self.request.user
         obj.photo = dowloand_photo(obj.title, obj.author)
+        obj.description = dowloand_book_desc(obj.title, obj.author)
         obj.save()
         return redirect('profile:profile')
 
@@ -65,12 +67,12 @@ class Search(BookMixinData, ListView):
 class FavoriteBookListView(BookMixinData, ListView):
 
     def get_queryset(self):
-        return Book.objects.filter(favorite=True)
+        return Book.objects.filter(user=self.request.user).filter(favorite=True)
 
 
 class OrderBooksByName(BookMixinData, ListView):
     def get_queryset(self):
-        return Book.objects.all().order_by('-title')
+        return Book.objects.filter(user=self.request.user).order_by('-title')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
@@ -80,7 +82,17 @@ class OrderBooksByName(BookMixinData, ListView):
 
 class OrderBooksByRating(BookMixinData, ListView):
     def get_queryset(self):
-        return Book.objects.all().order_by('-rating')
+        return Book.objects.filter(user=self.request.user).order_by('-rating')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['amout_books'] = Book.objects.filter(user=self.request.user).count()
+        return context
+
+
+class OrderBooksByTimeCreate(BookMixinData, ListView):
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user).order_by('time_create')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
