@@ -24,5 +24,6 @@ urlpatterns = [
     # path('', TemplateView.as_view(template_name='users/home.html'), name='home'),
     path('users/', include('users.urls')),
     path('', include('book.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]
 

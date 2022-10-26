@@ -46,6 +46,8 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',   # приложение с пользователями
     'book.apps.BookConfig',     # приложение с книгами
+
+    'tinymce', # https://github.com/jazzband/django-tinymce - редактор текста
 ]
 
 MIDDLEWARE = [
