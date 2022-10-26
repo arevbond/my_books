@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
-from .models import *
 from .forms import *
 from .utils import BookMixinData
+
+from .dowloand_photo import dowloand_photo
 
 
 class BookListView(LoginRequiredMixin, BookMixinData, ListView):
@@ -15,6 +16,9 @@ class BookListView(LoginRequiredMixin, BookMixinData, ListView):
         context = super().get_context_data()
         context['amout_books'] = Book.objects.all().count()
         return context
+
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user).order_by('-time_create')
 
 
 class UpdateBookView(UpdateView):
@@ -40,6 +44,7 @@ class AddBookView(CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.user = self.request.user
+        obj.photo = dowloand_photo(obj.title, obj.author)
         obj.save()
         return redirect('profile:profile')
 
@@ -53,7 +58,8 @@ class BookDetailView(DetailView):
 class Search(BookMixinData, ListView):
 
     def get_queryset(self):
-        return Book.objects.filter(Q(title__icontains=self.request.GET.get('search')) | Q(author__icontains=self.request.GET.get('search')))
+        return Book.objects.filter(Q(title__icontains=self.request.GET.get('search'), user=self.request.user) | Q(
+            author__icontains=self.request.GET.get('search'), user=self.request.user))
 
 
 class FavoriteBookListView(BookMixinData, ListView):
