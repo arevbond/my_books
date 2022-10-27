@@ -26,16 +26,16 @@ class UpdateBookView(UpdateView):
     form_class = UpdateBookForm
     template_name = 'book/update_book.html'
     pk_url_kwarg = 'book_id'
+    model = Book
 
     def get_object(self, queryset=None):
-        print(self.kwargs)
         return Book.objects.get(user=self.request.user, id=self.kwargs.get('book_id'))
 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.user = self.request.user
-        obj.save()
-        return redirect('profile:profile')
+        form.save()
+        return redirect(self.get_success_url())
 
 
 class AddBookView(CreateView):
@@ -98,3 +98,8 @@ class OrderBooksByTimeCreate(BookMixinData, ListView):
         context = super().get_context_data()
         context['amout_books'] = Book.objects.all().count()
         return context
+
+def delete_book(request, book_id):
+    book_to_delete = Book.objects.get(id=book_id)
+    book_to_delete.delete()
+    return redirect('profile:profile')

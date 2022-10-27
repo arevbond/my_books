@@ -18,3 +18,11 @@
 .link_to_review{
     text-decoration: none;
 }
+.desc_book{
+    font-size: 15px;
+}
+
+.button_blocks{
+    display: flex;
+    justify-content: space-between;
+}

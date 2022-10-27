@@ -15,7 +15,9 @@ urlpatterns = [
     path('favorite/', FavoriteBookListView.as_view(), name="favorite_books"),
     path('names/', OrderBooksByName.as_view(), name='order_by_title'),
     path('rating/', OrderBooksByRating.as_view(), name='order_by_rating'),
-    path('time/', OrderBooksByTimeCreate.as_view(), name='order_by_time_create')
+    path('time/', OrderBooksByTimeCreate.as_view(), name='order_by_time_create'),
+
+    path('detele/<int:book_id>', delete_book, name='delete'),
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

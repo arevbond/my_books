@@ -1,7 +1,7 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-    <div><h1>Всего книг - {{ amout_books }}</h1></div>
+    <div><h1>История записей ({{ amout_books }})</h1></div>
     <form action="{% url 'profile:search' %}" method="get" class="d-flex editContent mb-3">
     {% csrf_token %}
     <input type="search" name="search" class="form-control" placeholder="Введите название книги">
@@ -15,8 +15,8 @@
         <th class="col"><a href="{% url 'profile:order_by_title' %}" style="text-decoration: none; color: #212529">Название</a></th>
         <th class="col">Автор</th>
 {#        <th class="col">Категория</th>#}
-        <th class="col"><a href="{% url 'profile:order_by_rating' %}" style="text-decoration: none; color: #212529">Рейтинг</a></th>
-        <th class="col"><a href="{% url 'profile:order_by_time_create' %}" style="text-decoration: none; color: #212529">Время создания</a></th>
+        <th class="col"><a href="{% url 'profile:order_by_rating' %}" style="text-decoration: none; color: #212529">Моя оценка</a></th>
+        <th class="col"><a href="{% url 'profile:order_by_time_create' %}" style="text-decoration: none; color: #212529">Дата записи</a></th>
         <th class="col"><a href="{% url 'profile:favorite_books' %}" style="text-decoration: none; color: #212529">Любимая книга</a></th>
     </thead>
     <tbody>
@@ -25,9 +25,14 @@
             <td><a href="{{ book.get_absolute_url }}" class="link-dark">{{ book.title }}</a></td>
             <td>{{ book.author }}</td>
 {#            <td>{{ book.category }}</td>#}
-            <td>{{ book.rating }}</td>
-            <td>{{ book.time_create | date:'d F Y'}}</td>
-            <td>{{ book.favorite | yesno:"yeah,no,maybe"}}</td>
+            <td style="color: orange; font-weight: bold">{{ book.rating }}</td>
+            <td style="color: darkgray">{{ book.time_create | date:'d F Y'}}</td>
+            {% if book.favorite %}
+            <td>&#9989;</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+{#            <td>{{ book.favorite | yesno:"yeah,no,maybe"}}</td>#}
         </tr>
     {% endfor %}
     </tbody>

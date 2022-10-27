@@ -3,7 +3,7 @@
 {% block content %}
     <a href="{% url 'profile:profile' %}" class="link-secondary">Вернуться назад</a>
     <div class="">
-    <form action="{% url 'profile:add_book' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'profile:update_book' book.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-error">{{ form.non_field_errors }}</div>
         {% for f in form %}
@@ -12,7 +12,7 @@
         <div class="form-error">{{ f.errors }}</div>
         {% endfor %}
 
-    <button type="button" class="btn btn-secondary mb-3">Добавить</button>
+    <button type="submit" class="btn btn-secondary mb-3">Сохранить</button>
     </form>
     </div>
 {% endblock %}
