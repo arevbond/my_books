@@ -13,11 +13,6 @@ from .help_funcs.dowloan_book_description import dowloand_book_desc
 class BookListView(LoginRequiredMixin, BookMixinData, ListView):
     login_url = '/users/login/'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['amout_books'] = Book.objects.all().count()
-        return context
-
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user).order_by('-time_create')
 
@@ -66,6 +61,11 @@ class Search(BookMixinData, ListView):
 
 class FavoriteBookListView(BookMixinData, ListView):
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['story'] = 'Ваши любимые книги'
+        return context
+
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user).filter(favorite=True)
 
@@ -74,30 +74,16 @@ class OrderBooksByName(BookMixinData, ListView):
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user).order_by('-title')
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['amout_books'] = Book.objects.all().count()
-        return context
-
 
 class OrderBooksByRating(BookMixinData, ListView):
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user).order_by('-rating')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['amout_books'] = Book.objects.filter(user=self.request.user).count()
-        return context
 
 
 class OrderBooksByTimeCreate(BookMixinData, ListView):
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user).order_by('time_create')
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['amout_books'] = Book.objects.all().count()
-        return context
 
 def delete_book(request, book_id):
     book_to_delete = Book.objects.get(id=book_id)

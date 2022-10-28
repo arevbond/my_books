@@ -1,3 +1,6 @@
+.body{
+    font-family: 'Montserrat', sans-serif;
+}
 .detail_blocks{
     display: flex;
     margin-top: 20px;
@@ -23,6 +26,8 @@
 }
 
 .button_blocks{
+    margin-top: 100px;
     display: flex;
     justify-content: space-between;
 }
+

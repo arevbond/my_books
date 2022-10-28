@@ -1,7 +1,7 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-    <div><h1>История записей ({{ amout_books }})</h1></div>
+    <div><h1>{{ story }} {{ amout_books }}</h1></div>
     <form action="{% url 'profile:search' %}" method="get" class="d-flex editContent mb-3">
     {% csrf_token %}
     <input type="search" name="search" class="form-control" placeholder="Введите название книги">
@@ -10,8 +10,8 @@
 
     <div class="mb-2"><a href="{% url 'profile:add_book' %}" class="link-secondary">Добавить книгу</a></div>
 
-    <table class="table-info table">
-    <thead>
+    <table class="table table-hover">
+    <thead class="table-info">
         <th class="col"><a href="{% url 'profile:order_by_title' %}" style="text-decoration: none; color: #212529">Название</a></th>
         <th class="col">Автор</th>
 {#        <th class="col">Категория</th>#}

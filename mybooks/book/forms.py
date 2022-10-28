@@ -6,7 +6,7 @@ from .models import Book
 
 
 class AddBookForm(forms.ModelForm):
-    review = forms.CharField(label='Отзыв', widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
+    # review = forms.CharField(label='Отзыв', widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
 
     class Meta:
         fields = ('title', 'author', 'category', 'review', 'rating', 'favorite')
@@ -14,7 +14,7 @@ class AddBookForm(forms.ModelForm):
 
 
 class UpdateBookForm(forms.ModelForm):
-    review = forms.CharField(label='Отзыв', widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
+    # review = forms.CharField(label='Отзыв', widget=TinyMCE(attrs={'cols': 10, 'rows': 10}))
     class Meta:
         fields = ('title', 'author', 'category', 'photo', 'review', 'rating', 'favorite')
         model = Book
