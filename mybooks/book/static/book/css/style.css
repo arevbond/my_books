@@ -11,8 +11,9 @@
     margin-right: 50px;
 }
 .detail_review{
-    margin-top: 150px;
+    margin-top: 50px;
     width: 700px;
+    font-size: 22px;
 }
 .detail_bold{
     font-weight: bold;
@@ -26,8 +27,17 @@
 }
 
 .button_blocks{
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-between;
 }
 
+.detail_rating{
+    background-color: orange;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.rating{
+    text-align: center;
+}

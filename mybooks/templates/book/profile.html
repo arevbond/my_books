@@ -23,12 +23,25 @@
     {% for book in books %}
         <tr>
             <td><a href="{{ book.get_absolute_url }}" class="link-dark">{{ book.title }}</a></td>
-            <td>{{ book.author }}</td>
+            <td style="font-style: italic;">{{ book.author }}</td>
 {#            <td>{{ book.category }}</td>#}
-            <td style="color: orange; font-weight: bold">{{ book.rating }}</td>
+            {% if book.favorite %}
+            <td class='rating' style="color: purple; font-weight: bold">{{ book.rating }}   &#9733;</td>
+            {% else %}
+                {% if book.rating  >= 7 %}
+                <td class='rating' style="color: green; font-weight: bold">{{ book.rating }}   &#9733;</td>
+                 {% else %}
+                 {% if book.rating < 5 %}
+                 <td class='rating' style="color: red; font-weight: bold">{{ book.rating }}   &#9733;</td>
+                 {% else %}
+                 <td class='rating' style="color: gray; font-weight: bold">{{ book.rating }}   &#9733;</td>
+                 {% endif %}
+                {% endif %}
+            {% endif %}
+
             <td style="color: darkgray">{{ book.time_create | date:'d F Y'}}</td>
             {% if book.favorite %}
-            <td>&#9989;</td>
+            <td class="rating">&#10004;</td>
             {% else %}
             <td></td>
             {% endif %}

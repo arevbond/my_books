@@ -12,7 +12,7 @@
     <div class="detail_review">
 {#        <p><span class="detail_bold">Категория: </span>{{ book.category }}</p>#}
         <p><span class="detail_bold">Отзыв: </span> {{ book.review }}</p>
-        <p><span class="detail_bold">Оценка книги: </span>{{ book.rating }}</p>
+        <p><span class="detail_bold">Оценка книги: </span><span class="detail_rating">{{ book.rating }}</span></p>
         <div class="button_blocks">
             <div><a class='link_to_review' href="{% url 'profile:update_book' book_id=book.id %}">Изменить отзыв</a></div>
         <div><a href="{% url 'profile:delete' book.id %}" class="link_to_review">Удалить запись</a></div>

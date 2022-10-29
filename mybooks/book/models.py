@@ -17,7 +17,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название книги')
     author = models.CharField(max_length=100, verbose_name='Автор книги')
     description = models.CharField(max_length=255, verbose_name='Описание книги', null=True, blank=True)
-    category = models.CharField(max_length=50, choices=Category.choices, verbose_name='Категория')
+    category = models.CharField(max_length=50, choices=Category.choices, verbose_name='Категория', default='artistic')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Обложка', blank=True, null=True)
     review = models.TextField(blank=True, null=True, verbose_name='Рецензия')
     rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)],
