@@ -1,9 +1,12 @@
+from django.views.generic import ListView
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .forms import UserCreationForm
+from django.db.models import Q
 
+from .forms import UserCreationForm
+from .models import User
 
 class RegisterUser(View):
     template_name = 'registration/register.html'
@@ -29,3 +32,12 @@ class RegisterUser(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+
+class AllUsersView(ListView):
+    model = User
+    template_name = 'users/all_users.html'
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        return User.objects.filter(~Q(username=self.request.user))

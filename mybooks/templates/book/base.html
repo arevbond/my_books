@@ -18,6 +18,7 @@
     <li class="list-group-item">
         <div class="d-flex justify-content-between">
             <a href="{% url 'profile:profile' %}">{{ user }}</a>
+            <a href="{% url 'all_users' %}">All users</a>
         <a href="{% url 'logout' %}" class="link-secondary">Logout</a>
         </div>
     </li>

@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 from .forms import *
-from .utils import BookMixinData
+from .utils import BookMixinData, OtherBookMixinData
 
 from .help_funcs.dowloand_photo import dowloand_photo
 from .help_funcs.dowloan_book_description import dowloand_book_desc
@@ -89,3 +89,25 @@ def delete_book(request, book_id):
     book_to_delete = Book.objects.get(id=book_id)
     book_to_delete.delete()
     return redirect('profile:profile')
+
+class OtherProfile(ListView):
+    model = Book
+    template_name = 'book/other_user_profile.html'
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        return Book.objects.filter(user_id=self.kwargs['user_id'])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['user_id'] = self.kwargs['user_id']
+        return context
+# class OtherOrderBooksByTimeCreate(OtherBookMixinData, ListView):
+#     def get_queryset(self):
+#         return Book.objects.filter(user_id=self.kwargs['user_id']).order_by('time_create')
+
+
+# class OtherBookDetailView(DetailView):
+#     model = Book
+#     template_name = 'book/other_book_detail.html'
+#     pk_url_kwarg = 'book_id'

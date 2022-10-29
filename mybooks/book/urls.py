@@ -18,6 +18,10 @@ urlpatterns = [
     path('time/', OrderBooksByTimeCreate.as_view(), name='order_by_time_create'),
 
     path('detele/<int:book_id>', delete_book, name='delete'),
+
+    path('user_profile/<int:user_id>', OtherProfile.as_view(), name='user_profile'),
+    # path('other_book/<int:book_id>', OtherBookDetailView.as_view(), name='other_book'),
+    # path('other_time/<int:user_id>', OtherOrderBooksByTimeCreate.as_view(), name='other_order_by_time_create')
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

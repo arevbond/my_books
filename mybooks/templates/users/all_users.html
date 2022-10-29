@@ -1,0 +1,8 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<h1>All users</h1>
+    {% for u in users %}
+        <a href="{% url 'profile:user_profile' user_id=u.id %}">{{ u }} - {{ u.id }}</a>
+    {% endfor %}
+{% endblock %}

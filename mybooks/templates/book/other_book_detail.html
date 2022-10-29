@@ -1,0 +1,28 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+    <div class="detail_blocks">
+        <div class="detail_book">
+{#        <div class="mx-auto" style="width: 400px;">#}
+{#            <h3>{{ book.title }}</h3>#}
+{#            <h4>{{ book.author }}</h4>#}
+{#        </div>#}
+        <img src="{{ book.photo.url }}" alt="{{ book.title }}" class="img-fluid" width=400>
+        </div>
+    <div class="detail_review">
+{#        <p><span class="detail_bold">Категория: </span>{{ book.category }}</p>#}
+        <p><span class="detail_bold">Отзыв: </span> {{ book.review }}</p>
+        <p><span class="detail_bold">Оценка книги: </span>{{ book.rating }}</p>
+{#        <div class="button_blocks">#}
+{#            <div><a class='link_to_review' href="{% url 'profile:update_book' book_id=book.id %}">Изменить отзыв</a></div>#}
+{#        <div><a href="{% url 'profile:delete' book.id %}" class="link_to_review">Удалить запись</a></div>#}
+        </div>
+        </div>
+    </div>
+        {% if book.description %}
+            <div class="desc_book mx-auto">
+            <h6>Описание книги: </h6>
+            <p>{{ book.description }}</p>
+        </div>
+        {% endif %}
+{% endblock %}
